@@ -1,0 +1,22 @@
+FROM ubuntu:16.04
+RUN apt-get update -y \
+      && apt-get install -y --no-install-recommends \
+      software-properties-common \
+      python \
+      curl \
+      python-pip \
+      python-software-properties \
+      libstdc++-5-dev \
+      zlib1g-dev \
+      clang 
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash
+RUN apt-get install -y --no-install-recommends nodejs
+RUN pip install --upgrade pip
+RUN pip install mapnik
+RUN npm config set init.author.name "Omar Torres"
+RUN npm config set init.author.email omar@discipline-code.com
+RUN npm config set init.author.url http://discipline-code.com/
+RUN npm config set init.license MIT
+ENV HOME=/usr/src
+WORKDIR $HOME/app
+CMD /bin/bash
