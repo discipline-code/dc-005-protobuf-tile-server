@@ -1,5 +1,9 @@
 version: "3"
 services:
+  db:
+    image: mdillon/postgis
+    ports: 
+    - "9432:5432"
   node:
     build:
       context: .
@@ -13,14 +17,14 @@ services:
       - "6379:6379"
   tile-server:
     build: .
-    env_file: .env
     command: npm run start-development
+    links:
+      - db
+      - redis
     depends_on: # Express dependency between services
+      - db 
       - redis
     volumes:
       - .:/usr/src/app
-      # - /usr/src/app/node_modules
     ports: 
       - "8081:8081"
-    links:
-      - redis

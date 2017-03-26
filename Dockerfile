@@ -24,5 +24,5 @@ WORKDIR $HOME/app
 RUN npm install
 COPY . $HOME/app
 
-CMD npm run start-production
+CMD npm run start
 EXPOSE 8081
